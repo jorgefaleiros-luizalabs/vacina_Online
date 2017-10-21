@@ -1,27 +1,25 @@
 // var Request = require('tedious').Request;
-var sql = require('../database/connection')
+var conn = require('../database/connection')
+var sql = require('mssql');
 
 function makeRequest(query) {
   return new Promise((resolve, reject) => {
     try {
-      sql.connection()
-        .then(pool => {
-          return pool.request()
-            .query(query);
-        })
-      .then(result => {
-        pool.close();
-        resolve(result);
+      var req = new sql.Request(conn.connection());
+      conn.connection().connect()
+      .then(() => {
+        req.query(query, (err, result) => {
+          resolve(result);
+          conn.connection().close();
+        });
       })
-      .catch(err => {
-        console.log(err);
-       })
+      .catch((error) => {
+        reject(error);
+      })
     } catch (err) {
       reject(err);
     }
-
   })
-
 }
 
 module.exports = { 

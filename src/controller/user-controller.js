@@ -1,9 +1,18 @@
 // var conn = require('../database/connection');
+var sqlRequest = require('../utils/request');
+var sql = require('../database/connection');
 
 function getUser(id){
     return new Promise((resolve, reject) => {
         try {
-            resolve('ok');
+           sqlRequest.makeRequest('select * from Pacientes where Matricula=' + id)
+           .then((result) => {
+                var res = result.recordset[0];
+                resolve(res);
+           })
+           .catch((error) => {
+               reject(error)
+           })
         } catch (err) {
             reject(err);
         }

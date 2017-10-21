@@ -3,9 +3,14 @@ var router = express.Router();
 var userController = require('../controller/user-controller');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  
-  res.send('respond with a resource');
+router.get('/:id', function(req, res, next) {
+  userController.getUser(req.params.id)
+  .then((response) => {
+    res.json(response);
+  })
+  .catch(err => {
+    throw err;
+  })
 });
 
 router.get('/vacine/ok/:id', (req, res) => {
