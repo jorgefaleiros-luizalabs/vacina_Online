@@ -23,9 +23,4 @@ function connection() {
     }
 }
 
-// connection.on('connect', function(err) {
-//   if (err) {
-//     console.log(err);
-//   }});
-
 module.exports = connection
