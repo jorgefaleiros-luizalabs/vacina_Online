@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 var loginController = require('../controller/login-controller');
 
-router.get('/', (req, res) => {
-    loginController.getLogin(req.params.id).then((response) => {
+router.post('/', (req, res) => {
+    loginController.getLogin(req.body.susCard, req.body.birthDate)
+      .then((response) => {
         res.send(response);    
     })
-    .catch((error) => {
+    .catch(error => {
         throw error;
     })
 })
