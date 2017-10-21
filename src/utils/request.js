@@ -9,8 +9,8 @@ function makeRequest(query) {
       conn.connection().connect()
       .then(() => {
         req.query(query, (err, result) => {
-          resolve(result);
           conn.connection().close();
+          resolve(result);
         });
       })
       .catch((error) => {

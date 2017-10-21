@@ -5,9 +5,16 @@ var sql = require('../database/connection');
 function getUser(id){
     return new Promise((resolve, reject) => {
         try {
-           sqlRequest.makeRequest('select * from Pacientes where Matricula=' + id)
+           sqlRequest.makeRequest('select Nome, Dt_Nasc, Sexo, Cep, Cod_UbsCad from Pacientes where Matricula=' + id)
            .then((result) => {
                 var res = result.recordset[0];
+                switch (res.Sexo){
+                    case 1:
+                        res.Sexo = 'Masculino'
+                        break;
+                    case 2:
+                        res.Sexo = 'Feminino'
+                }
                 resolve(res);
            })
            .catch((error) => {
@@ -21,7 +28,7 @@ function getUser(id){
 function getInTimeVacine(id){
     return new Promise((resolve, reject) => {
         try {
-            resolve('ok');
+            
         } catch (error) {
             throw error;
         }

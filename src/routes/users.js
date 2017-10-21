@@ -9,7 +9,9 @@ router.get('/:id', function(req, res, next) {
     res.json(response);
   })
   .catch(err => {
-    throw err;
+    if(err) {
+      res.send(err);
+    }
   })
 });
 
