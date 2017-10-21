@@ -1,26 +1,22 @@
-var Connection = require('tedious').Connection;
+// var Connection = require('tedious').Connection;
+var mssql = require('mssql')
 
 var config = {
-  userName: 'ragnarok', // update me
+  user: 'ragnarok', // update me
   password: 'qx31hg67', // update me
   server: '172.21.29.26',
-  options: {
-    port: 1433,
-    database: 'hackatonpreta',
-    connectTimeout: 1000,
-    requestTimeout: 1000
-  }
+  database: 'hackatonpreta'
 }
 
 
-
 function connection() {
-
     try {
-      return new Connection(config);
+      return mssql.connect(config);
     } catch (err) {
       throw err;
     }
 }
 
-module.exports = connection
+module.exports = { 
+  connection
+}

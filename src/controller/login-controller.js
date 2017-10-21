@@ -1,15 +1,9 @@
-var conn = require('../database/connection');
+var conn = require('../utils/request');
 
 function getLogin(id){
     return new Promise((resolve, reject) => {
         try {
-          conn().on('connect', (err) => {
-            if (err) {
-              console.log(err);
-              reject(err);
-            }
-            resolve('ok');
-          })
+          conn.makeRequest('select * from Pacientes');
         } catch (err) {
             reject(err);
         }

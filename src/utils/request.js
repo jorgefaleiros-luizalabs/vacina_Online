@@ -1,21 +1,21 @@
-var Request = require('tedious').Request;
+// var Request = require('tedious').Request;
+var sql = require('../database/connection')
 
 function makeRequest(query) {
-  var request = new Request(query, function(err, rowCount) {
-    if (err) {
-      console.log(err);
-      return err;
-    } 
-    request.on('row', columns => {
-      columns.forEach(column => { 
-        if (column.value === null) {
-          console.log('NULL');
-        } else {
-          console.log(column.value);
-        }
-      });
-    });
-  });
+  sql.connection()
+    .then(pool => {
+      return pool.request()
+        .query(query);
+    })
+  .then(result => {
+    console.log(result);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  
 }
 
-module.exports = makeRequest
+module.exports = { 
+  makeRequest
+}
