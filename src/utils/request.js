@@ -14,6 +14,7 @@ function makeRequest(query) {
         });
       })
       .catch((error) => {
+        conn.connection().close();
         reject(error);
       })
     } catch (err) {

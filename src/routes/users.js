@@ -10,7 +10,7 @@ router.get('/:id', function(req, res, next) {
   })
   .catch(err => {
     if(err) {
-      res.send(err);
+      res.status(408).send(err);
     }
   })
 });
