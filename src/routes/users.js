@@ -35,7 +35,7 @@ router.get('/vacine/late/:id', (req, res) => {
   })
 })
 
-router.get('/vacine/comming/:id', (req, res) => {
+router.get('/vacine/coming/:id', (req, res) => {
   userController.getToComeVacine(req.params.id)
   .then((response) => {
     res.send(response);

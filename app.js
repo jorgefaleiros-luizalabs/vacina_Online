@@ -8,6 +8,7 @@ var cors = require('cors');
 var index = require('./src/routes/login');
 var users = require('./src/routes/users');
 var vacine = require('./src/routes/vacine');
+var outpost = require('./src/routes/outpost');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/login', index);
 app.use('/users', users);
 app.use('/vacine', vacine);
+app.use('/outpost', outpost);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
